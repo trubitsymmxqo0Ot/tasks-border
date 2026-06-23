@@ -2,12 +2,15 @@ import { useState } from "react";
 import { ThemeList } from "./types";
 
 export const DEFAULT_THEME = "light";
+const isServer = typeof window === "undefined";
 
 export const useSetTheme = () => {
   const [userTheme, setUserTheme] = useState<ThemeList>(DEFAULT_THEME);
   const onChangeTheme = (theme: ThemeList) => {
     setUserTheme(theme);
-    localStorage.setItem("theme", theme);
+    if (!isServer) {
+      localStorage.setItem("theme", theme);
+    }
   };
 
   return {
@@ -17,8 +20,9 @@ export const useSetTheme = () => {
 };
 
 export const getTheme = () => {
+  if (isServer) return DEFAULT_THEME;
   const [theme] = useState(() => {
-    return (localStorage.getItem("theme") as ThemeList) ?? DEFAULT_THEME;
+    return localStorage.getItem("theme") as ThemeList;
   });
   return theme;
 };
