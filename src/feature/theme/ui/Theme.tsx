@@ -1,19 +1,44 @@
 "use client";
-import { useTheme } from "@/shared/contexts/theme/useTheme";
 import { useHydration } from "@/shared/hooks/useHydration";
+import { Skeleton } from "@/shared/ui/Skeleton";
+import { Wrapper } from "@/shared/ui/Wrapper";
+import { Typography } from "@/shared/ui/Typography";
+import { selectedTheme } from "../lib/selectedTheme";
+import { useTheme } from "@/shared/contexts/theme/useTheme";
+import { themeSchema } from "../model/schema";
+import Image from "next/image";
+import { useState } from "react";
+import clsx from "clsx";
 
 export const Theme = () => {
+  const { theme } = useTheme();
   const hydartion = useHydration();
-  const { theme, onChangeTheme } = useTheme();
-  if (!hydartion) return null;
+  const [open, setOpen] = useState(false);
+  if (!hydartion) return <Skeleton />;
   return (
-    <div>
-      <h2 className="text-deadline-week bg-primary">useSetTheme {theme}</h2>
-      <div>
-        <div onClick={() => onChangeTheme("light")}>light</div>
-        <div onClick={() => onChangeTheme("dark")}>dark</div>
-        <div onClick={() => onChangeTheme("very-dark")}>very dark</div>
-      </div>
-    </div>
+    <Wrapper>
+      <Typography as="button" onClick={() => setOpen(!open)}>
+        {selectedTheme({ theme })}
+      </Typography>
+      <Wrapper
+        className={clsx(
+          open ? "max-h-600px" : "max-h-0",
+          "overflow-hidden transition-all",
+        )}
+      >
+        {themeSchema.map((item) => (
+          <Wrapper key={item.id}>
+            <Image
+              src={item.url}
+              width={20}
+              height={20}
+              unoptimized
+              alt="themes"
+            />
+            <Typography>{item.title}</Typography>
+          </Wrapper>
+        ))}
+      </Wrapper>
+    </Wrapper>
   );
 };
