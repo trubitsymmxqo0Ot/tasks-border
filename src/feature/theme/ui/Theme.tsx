@@ -1,12 +1,19 @@
 "use client";
-import { setTheme } from "@/shared/contexts/theme/useTheme"
+import { useSetTheme } from "@/shared/contexts/theme/useTheme";
+import { useHydration } from "@/shared/hooks/useHydration";
 
 export const Theme = () => {
-    return (
-        <div>
-            <div onClick={() => setTheme({theme: 'light'})}>light</div>
-            <div onClick={() => setTheme({theme: 'dark'})}>dark</div>
-            <div onClick={() => setTheme({theme: 'very dark'})}>very dark</div>
-        </div>
-    )
-}
+  const hydartion = useHydration();
+  const { theme, onChangeTheme } = useSetTheme();
+  if (!hydartion) return null;
+  return (
+    <div>
+      <h2>Theme now {theme}</h2>
+      <div>
+        <div onClick={() => onChangeTheme("light")}>light</div>
+        <div onClick={() => onChangeTheme("dark")}>dark</div>
+        <div onClick={() => onChangeTheme("very dark")}>very dark</div>
+      </div>
+    </div>
+  );
+};

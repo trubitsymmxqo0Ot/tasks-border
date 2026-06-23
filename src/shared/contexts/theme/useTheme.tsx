@@ -1,21 +1,24 @@
+import { useState } from "react";
 import { ThemeList } from "./types";
 
-const isServer = typeof window === 'undefined';
-const DEFAULT_THEME = 'dark';
+export const DEFAULT_THEME = "light";
 
-export const getTheme = (key: string) => {
-    if(isServer) return undefined;
-    let theme;
-    try {
-        theme = localStorage.getItem(key) as ThemeList;
-    } catch(e) {}
-    const currentTheme = theme ?? DEFAULT_THEME;
-    return currentTheme;
-}
+export const useSetTheme = () => {
+  const [userTheme, setUserTheme] = useState<ThemeList>(DEFAULT_THEME);
+  const onChangeTheme = (theme: ThemeList) => {
+    setUserTheme(theme);
+    localStorage.setItem("theme", theme);
+  };
 
-export const setTheme = ({LSKey = 'theme', theme}: {LSKey?: string, theme: ThemeList}) => {
-    if(isServer) return undefined;
-    try {
-        localStorage.setItem(LSKey, theme);
-    } catch(e) {}
-}
+  return {
+    theme: userTheme,
+    onChangeTheme,
+  };
+};
+
+export const getTheme = () => {
+  const [theme] = useState(() => {
+    return (localStorage.getItem("theme") as ThemeList) ?? DEFAULT_THEME;
+  });
+  return theme;
+};

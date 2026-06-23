@@ -1,9 +1,11 @@
-import { Theme } from "@/feature/theme"
+"use client";
+
+import { Theme } from "@/feature/theme";
 
 export const Navbar = () => {
-    return (
-        <>
-        <Theme/>
-        </>
-    )
-}
+  return (
+    <>
+      <Theme />
+    </>
+  );
+};
