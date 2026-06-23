@@ -1,14 +1,17 @@
 "use client";
 
 import { ThemeProvider } from "@/shared/contexts/theme/ThemeContext";
-import { getTheme } from "@/shared/contexts/theme/useTheme";
-import { ReactNode } from "react";
+import { setDefaultTheme, useTheme } from "@/shared/contexts/theme/useTheme";
+import { ReactNode, useEffect } from "react";
 
 interface ProvidersProps {
   children: ReactNode;
 }
 
 export const Providers = ({ children }: ProvidersProps) => {
-  const theme = getTheme();
+  const { theme } = useTheme();
+  useEffect(() => {
+    setDefaultTheme();
+  }, []);
   return <ThemeProvider value={theme}>{children}</ThemeProvider>;
 };
