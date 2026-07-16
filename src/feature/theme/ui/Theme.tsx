@@ -21,7 +21,7 @@ export const Theme = () => {
 
   return (
     <div
-      className="flex bg-secondary rounded-2xl max-w-30 relative"
+      className="flex bg-secondary rounded-2xl max-w-30 relative border-line-primary border"
       style={{ gap: GAP, padding: PADDING }}
     >
       {themeSchema.map((item) => (
