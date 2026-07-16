@@ -19,11 +19,13 @@ webpack(config) {
         ...fileLoaderRule,
         test: /\.svg$/i,
         resourceQuery: /url/,
+        icon: true
       },
       {
         test: /\.svg$/i,
         issuer: fileLoaderRule.issuer,
         resourceQuery: { not: [...fileLoaderRule.resourceQuery.not, /url/] },
+        icon: true
       },
     )
 
