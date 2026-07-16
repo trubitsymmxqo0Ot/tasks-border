@@ -1,41 +1,47 @@
 "use client";
 import { useHydration } from "@/shared/hooks/useHydration";
 import { Skeleton } from "@/shared/ui/Skeleton";
-import { selectedTheme } from "../lib/selectedTheme";
 import { useTheme } from "@/shared/contexts/theme/useTheme";
 import { themeSchema } from "../model/schema";
-import { useState } from "react";
 import clsx from "clsx";
+import { GAP, OFFSET, PADDING, SIZE } from "../model/constants";
 
 export const Theme = () => {
   const { theme, onChangeTheme } = useTheme();
   const hydartion = useHydration();
-  const [open, setOpen] = useState(false);
   if (!hydartion) return <Skeleton />;
 
+  const position = () => {
+    const index = themeSchema.findIndex((item) => item.type === theme);
+    if (index !== -1) {
+      return PADDING + index * (SIZE + GAP) + OFFSET - PADDING;
+    }
+    return 6;
+  };
+
   return (
-    <section>
-      <button onClick={() => setOpen(!open)}>{selectedTheme({ theme })}</button>
-      <div
-        className={clsx(
-          open ? "max-h-600px" : "max-h-0",
-          "overflow-hidden transition-all",
-        )}
-      >
-        {themeSchema.map((item) => (
+    <div
+      className="flex bg-secondary rounded-2xl max-w-30 relative"
+      style={{ gap: GAP, padding: PADDING }}
+    >
+      {themeSchema.map((item) => (
+        <div
+          key={item.id}
+          className="cursor-pointer"
+          onClick={() => onChangeTheme(item.type)}
+        >
+          <item.url
+            className="relative z-10"
+            style={{ width: SIZE, height: SIZE }}
+          />
           <div
-            key={item.id}
-            className="cursor-pointer"
-            onClick={() => {
-              onChangeTheme(item.type);
-              setOpen(false);
-            }}
-          >
-            <item.url className="h-5 w-5" />
-            <p>{item.title}</p>
-          </div>
-        ))}
-      </div>
-    </section>
+            className={clsx(
+              "absolute w-8 h-8 bg-color-tertiary top-1/2 -translate-y-1/2 rounded-full transition-all",
+            )}
+            style={{ left: `${position()}px` }}
+          />
+        </div>
+      ))}
+    </div>
   );
 };
