@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body className="bg-primary text-color-primary">
+      <body className="bg-primary text-color-primary transition-colors duration-600">
         <Providers>
           <Navbar />
           <main className={clsx(text({ size: "sm" }), "max-w-300 p-5 mx-auto")}>

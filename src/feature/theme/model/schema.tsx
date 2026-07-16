@@ -6,13 +6,12 @@ import { FC, SVGProps } from "react";
 
 interface IThemeSchema {
   id: number;
-  title: string;
   url: FC<SVGProps<SVGSVGElement>>;
   type: ThemeList;
 }
 
 export const themeSchema: IThemeSchema[] = [
-  { id: 1, title: "Светлая тема", url: Light, type: "light" },
-  { id: 2, title: "Темная тема", url: Dark, type: "dark" },
-  { id: 3, title: "Очень темная тема", url: VeryDark, type: "very-dark" },
+  { id: 1, url: Light, type: "light" },
+  { id: 2, url: Dark, type: "dark" },
+  { id: 3, url: VeryDark, type: "very-dark" },
 ];
