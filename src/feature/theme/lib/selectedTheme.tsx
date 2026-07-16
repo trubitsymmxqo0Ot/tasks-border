@@ -1,10 +1,8 @@
 import { ThemeList } from "@/shared/contexts/theme/types";
-import { Typography } from "@/shared/ui/Typography";
 import Image from "next/image";
 import Light from "../assets/light.svg";
 import Dark from "../assets/dark.svg";
 import VeryDark from "../assets/very-dark.svg";
-import { Wrapper } from "@/shared/ui/Wrapper";
 
 export const selectedTheme = ({
   theme,
@@ -15,29 +13,24 @@ export const selectedTheme = ({
 }) => {
   if (theme === "light") {
     return (
-      <Wrapper className={className}>
-        <Typography as="p">Светлая тема</Typography>
-        <Image src={Light} unoptimized alt="Светлая тема" className="w-5 h-5" />
-      </Wrapper>
+      <span className={className}>
+        <span>Светлая тема</span>
+        <Light className="h-5 w-5" />
+      </span>
     );
   } else if (theme === "dark") {
     return (
-      <Wrapper className={className}>
-        <Typography as="p">Темная тема</Typography>
-        <Image src={Dark} alt="Темная тема" unoptimized className="w-5 h-5" />
-      </Wrapper>
+      <span className={className}>
+        <span>Темная тема</span>
+        <Dark className="h-5 w-5" />
+      </span>
     );
   } else {
     return (
-      <Wrapper>
-        <Typography as="p">Очень темная тема</Typography>
-        <Image
-          src={VeryDark}
-          alt="Очень темная тема"
-          unoptimized
-          className="w-5 h-5"
-        />
-      </Wrapper>
+      <span>
+        <span>Очень темная тема</span>
+        <VeryDark className="h-5 w-5" />
+      </span>
     );
   }
 };

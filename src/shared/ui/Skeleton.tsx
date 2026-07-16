@@ -9,7 +9,7 @@ export const Skeleton = ({
   contentStyles,
   items = 0,
 }: SkeletonProps) => {
-  if (items) {
+  if (!items) {
     return <div className={containerStyles}></div>;
   }
   return (
