@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { Providers } from "./Providers";
+import { Navbar } from "@/widgets/navbar";
 
 export const metadata: Metadata = {
   title: "Tasks border - главная страница",
@@ -14,7 +16,12 @@ export default function RootLayout({
 }>) {
   return (
     <html>
-      <body>{children}</body>
+      <body className="bg-primary text-color-primary">
+        <Providers>
+          <Navbar />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
