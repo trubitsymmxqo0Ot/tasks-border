@@ -7,11 +7,13 @@ import { text } from "@/shared/config/text";
 interface PopupProfileModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
+  setIsAuthonized: (isAuthonized: boolean) => void;
 }
 
 export const PopupProfileModal = ({
   open,
   setOpen,
+  setIsAuthonized,
 }: PopupProfileModalProps) => {
   return (
     <div className="flex items-center relative">
@@ -31,6 +33,7 @@ export const PopupProfileModal = ({
               href={item.href}
               key={item.href}
               onClick={() => setOpen(false)}
+              className="block mb-2"
             >
               {item.name}
             </Link>
@@ -39,7 +42,10 @@ export const PopupProfileModal = ({
         <Link
           href="/"
           className="bg-danger-bg flex justify-center items-center py-2"
-          onClick={() => setOpen(false)}
+          onClick={() => {
+            setOpen(false);
+            setIsAuthonized(false);
+          }}
         >
           Выйти
         </Link>

@@ -17,7 +17,13 @@ export const QuestTable = ({
 }: QuestTableProps) => {
   return (
     <div className={clsx("w-full", className)}>
-      <p className={clsx(text({ size: "bg", weights: "bold" }), titleClass)}>
+      <p
+        className={clsx(
+          "text-center",
+          text({ size: "bg", weights: "bold" }),
+          titleClass,
+        )}
+      >
         {title}
       </p>
       <QuestTableList quests={quests} />

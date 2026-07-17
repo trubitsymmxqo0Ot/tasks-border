@@ -36,6 +36,8 @@ export const ProfileModalLogin = ({
           type="text"
           placeholder="Введите ваше имя или почту"
           maxLength={35}
+          animationPlaceholder={true}
+          className="w-full"
           inputStyle={clsx(
             text({ size: "md" }),
             "border-line-secondary border-2 p-2 block w-full",
@@ -45,6 +47,8 @@ export const ProfileModalLogin = ({
           direction="right"
           showPassword={showPassword}
           type="password"
+          animationPlaceholder={true}
+          className="w-full"
           inputStyle={clsx(
             text({ size: "md" }),
             "border-line-secondary border-2 p-2 block w-full",

@@ -4,14 +4,21 @@ import { Portal } from "@/shared/ui/Portal";
 import { useState } from "react";
 import { TypeModal } from "../types/types";
 import { ProfileModalLogin } from "./ProfileModalLogin";
+import Link from "next/link";
 
 export const ProfileModal = () => {
-  const [isAuthonized] = useState(false);
+  const [isAuthonized, setIsAuthonized] = useState(true);
   const [open, setOpen] = useState(false);
   const [typeModal, setTypeModal] = useState<TypeModal>("");
 
   if (isAuthonized) {
-    return <PopupProfileModal open={open} setOpen={setOpen} />;
+    return (
+      <PopupProfileModal
+        open={open}
+        setOpen={setOpen}
+        setIsAuthonized={setIsAuthonized}
+      />
+    );
   }
 
   const handleOpenModal = (type: TypeModal) => {
@@ -33,6 +40,7 @@ export const ProfileModal = () => {
       >
         Зарегистрироваться
       </button>
+      <Link href="/123123">Ссылка на 404</Link>
       {open && (
         <Portal>
           {typeModal === "login" ? (

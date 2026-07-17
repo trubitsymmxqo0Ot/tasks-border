@@ -1,18 +1,27 @@
 import clsx from "clsx";
-import { ReactNode } from "react";
+import {
+  ChangeEventHandler,
+  InputHTMLAttributes,
+  ReactNode,
+  useRef,
+  useState,
+} from "react";
+import { directionMove, Directions } from "../helpers/directionMove";
 
-interface InputProps {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   value: string;
-  onChange: (value: string) => void;
+  onChange: ChangeEventHandler<HTMLInputElement>;
   children?: ReactNode;
   className?: string;
   inputStyle?: string;
   childrenStyle?: string;
   direction?: "left" | "right";
-  type: string;
+  type?: string;
   placeholder?: string;
   showPassword?: boolean;
   maxLength?: number;
+  idForLabel?: string;
+  animationPlaceholder?: boolean;
 }
 
 export const Input = ({
@@ -21,30 +30,78 @@ export const Input = ({
   className,
   direction = "right",
   children,
-  type,
+  type = "text",
   childrenStyle,
   inputStyle,
   placeholder = "",
   showPassword = false,
   maxLength,
+  idForLabel,
+  animationPlaceholder,
+  ...rest
 }: InputProps) => {
+  const [textDirection, textSetDirection] = useState<Directions>(null);
   const currentType = showPassword ? "text" : "password";
+  const [onFocus, setOnFocus] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
+  const handleFocus = () => {
+    setOnFocus(true);
+    textSetDirection(
+      directionMove({
+        prevElem: ref.current?.previousElementSibling,
+        nextElem: ref.current?.nextElementSibling,
+        currentElem: ref.current,
+      }),
+    );
+  };
+
+  const directionStyle = {
+    top: "-top-1/2 left-1",
+    bottom: "top-17 left-1",
+    none: "opacity-0 top-1/2 left-2.5",
+  };
   return (
-    <div className={clsx("relative w-full", className)}>
-      <input
-        type={type === "password" ? currentType : type}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={clsx(direction === "left" ? "pl-8" : "pr-11", inputStyle)}
-        placeholder={placeholder}
-        maxLength={maxLength}
-      />
+    <div className={clsx("relative", className)} ref={ref}>
+      <div className="realative">
+        {animationPlaceholder && (
+          <label
+            htmlFor={idForLabel}
+            className={clsx(
+              onFocus
+                ? directionStyle[textDirection || "top"]
+                : !value
+                  ? "top-1/2 left-2.5"
+                  : directionStyle[textDirection || "top"],
+
+              "absolute -translate-y-1/2 transition-all cursor-text",
+            )}
+          >
+            {placeholder}
+          </label>
+        )}
+        <input
+          {...rest}
+          onFocus={() => handleFocus()}
+          onBlur={() => setOnFocus(false)}
+          id={idForLabel}
+          type={type === "password" ? currentType : type}
+          value={value}
+          placeholder={!animationPlaceholder ? placeholder : ""}
+          onChange={onChange}
+          className={clsx(
+            !!children &&
+              (direction === "left" ? "pl-8" : "pr-11 relative z-10"),
+            inputStyle,
+          )}
+          maxLength={maxLength}
+        />
+      </div>
       {!!children && (
         <div
           className={clsx(
             direction === "right" ? "right-0" : "left-4",
-            "absolute top-1/2 -translate-1/2 bg-secondary z-10",
+            "absolute top-1/2 -translate-1/2 bg-secondary z-10 ",
             childrenStyle,
           )}
         >

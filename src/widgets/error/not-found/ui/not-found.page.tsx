@@ -4,7 +4,6 @@ import { notFoundData } from "../model/not-found.data";
 import { NotFoundQuest } from "./not-found-quest";
 import { text } from "@/shared/config/text";
 import Link from "next/link";
-import { Fragment } from "react/jsx-runtime";
 import { Breadcrumbs } from "@/shared/ui/Breadcrumbs";
 
 export const NotFoundPage = () => {
