@@ -21,7 +21,7 @@ export const Theme = () => {
 
   return (
     <div
-      className="flex bg-secondary rounded-2xl max-w-30 relative border-line-primary border"
+      className="flex bg-elevated rounded-2xl max-w-30 relative border-line-primary border"
       style={{ gap: GAP, padding: PADDING }}
     >
       {themeSchema.map((item) => (
@@ -31,7 +31,7 @@ export const Theme = () => {
           onClick={() => onChangeTheme(item.type)}
         >
           <item.url
-            className="relative z-10"
+            className="relative z-10 hover:text-color-secondary transition-colors"
             style={{ width: SIZE, height: SIZE }}
           />
           <div
