@@ -1,4 +1,4 @@
-export const GAP = 20;
-export const SIZE = 20;
-export const PADDING = 12;
-export const OFFSET = 6;
+export const GAP = 20 as const;
+export const SIZE = 20 as const;
+export const PADDING = 12 as const;
+export const OFFSET = 6 as const;
