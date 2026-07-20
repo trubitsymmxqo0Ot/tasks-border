@@ -31,7 +31,7 @@ export const ProfileModalLogin = ({
       <div className="mb-7 w-full flex flex-col items-center gap-5">
         <Input
           showPassword={showPassword}
-          onChange={setName}
+          onChange={(e) => setName(e.target.value)}
           value={name}
           type="text"
           placeholder="Введите ваше имя или почту"
@@ -54,7 +54,7 @@ export const ProfileModalLogin = ({
             "border-line-secondary border-2 p-2 block w-full",
           )}
           value={password}
-          onChange={setPassword}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Введите пароль"
         >
           {showPassword ? (

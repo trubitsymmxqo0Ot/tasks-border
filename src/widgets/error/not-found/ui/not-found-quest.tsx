@@ -1,4 +1,4 @@
-import { QuestsProps } from "@/entities/quest-table";
+import { QuestsProps } from "@/feature/quest-table";
 import { text } from "@/shared/config/text";
 import clsx from "clsx";
 import CircleCheck from "@/shared/assets/circle-check.svg";

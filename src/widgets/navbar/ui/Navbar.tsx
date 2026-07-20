@@ -1,7 +1,7 @@
 "use client";
 
 import { ProfileModal } from "@/feature/profile";
-import { Theme } from "@/feature/theme";
+import { Theme } from "@/entities/theme";
 
 export const Navbar = () => {
   return (

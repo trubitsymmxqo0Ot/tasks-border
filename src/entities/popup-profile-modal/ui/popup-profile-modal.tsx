@@ -23,7 +23,7 @@ export const PopupProfileModal = ({
       <div
         className={clsx(
           text({ size: "sm" }),
-          "absolute w-50 overflow-hidden transition-all top-32.5 rounded-b-xl left-1/2 -translate-1/2 flex flex-col text-center gap-3",
+          "absolute w-50 overflow-hidden transition-all bg-primary top-32.5 rounded-b-xl left-1/2 -translate-1/2 flex flex-col text-center gap-3",
           open ? "h-50 py-6 border-secondary border-4" : "h-0 border-0",
         )}
       >

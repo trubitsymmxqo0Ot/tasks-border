@@ -1,9 +1,5 @@
-import { TaskBorder } from "@/widgets/task-border/ui/TaskBorder";
+import { TasksBorder } from "@/feature/tasks-border";
 
 export default function Home() {
-  return (
-    <div>
-      <TaskBorder />
-    </div>
-  );
+  return <TasksBorder />;
 }

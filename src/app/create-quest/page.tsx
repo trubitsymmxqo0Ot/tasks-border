@@ -1,5 +1,5 @@
+import { CreateQuestBorder } from "@/feature/create-quest-border";
 import { Temp } from "@/shared/ui/Temp";
-import { CreateQuestBorder } from "@/widgets/create-quest-border/CreateQuestBorder";
 
 export default function CreateQuest() {
   return (

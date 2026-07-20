@@ -1,0 +1,12 @@
+export const COLORS = [
+  "primary",
+  "secondary",
+  "tertiary",
+  "danger",
+  "success",
+  "warning",
+] as const;
+
+export const WEIGHTS = ["bold", "semibold", "black", "medium"] as const;
+
+export const SIZES = ["tn", "sm", "md", "lg", "bg"] as const;

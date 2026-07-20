@@ -63,23 +63,23 @@ export const Input = ({
   };
   return (
     <div className={clsx("relative", className)} ref={ref}>
-      <div className="realative">
-        {animationPlaceholder && (
-          <label
-            htmlFor={idForLabel}
-            className={clsx(
-              onFocus
-                ? directionStyle[textDirection || "top"]
-                : !value
-                  ? "top-1/2 left-2.5"
-                  : directionStyle[textDirection || "top"],
+      {animationPlaceholder && (
+        <label
+          htmlFor={idForLabel}
+          className={clsx(
+            onFocus
+              ? directionStyle[textDirection || "top"]
+              : !value
+                ? "top-1/2 left-2.5"
+                : directionStyle[textDirection || "top"],
 
-              "absolute -translate-y-1/2 transition-all cursor-text",
-            )}
-          >
-            {placeholder}
-          </label>
-        )}
+            "absolute -translate-y-1/2 transition-all cursor-text text-color-tertiary",
+          )}
+        >
+          {placeholder}
+        </label>
+      )}
+      <span className="relative w-auto">
         <input
           {...rest}
           onFocus={() => handleFocus()}
@@ -96,18 +96,18 @@ export const Input = ({
           )}
           maxLength={maxLength}
         />
-      </div>
-      {!!children && (
-        <div
-          className={clsx(
-            direction === "right" ? "right-0" : "left-4",
-            "absolute top-1/2 -translate-1/2 bg-secondary z-10 ",
-            childrenStyle,
-          )}
-        >
-          {children}
-        </div>
-      )}
+        {!!children && (
+          <span
+            className={clsx(
+              direction === "right" ? "right-0" : "left-4",
+              "absolute top-1/2 -translate-1/2 bg-secondary z-10 ",
+              childrenStyle,
+            )}
+          >
+            {children}
+          </span>
+        )}
+      </span>
     </div>
   );
 };

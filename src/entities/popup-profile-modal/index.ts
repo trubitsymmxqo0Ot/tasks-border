@@ -1,1 +1,1 @@
-export {PopupProfileModal} from './ui/popup-profile-modal';
+export { PopupProfileModal } from "./ui/popup-profile-modal";

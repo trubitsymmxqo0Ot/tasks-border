@@ -15,5 +15,13 @@ export const text = tv({
       black: "font-black",
       medium: "font-meduim",
     },
+    colors: {
+      primary: "text-color-primary",
+      secondary: "text-color-secondary",
+      tertiary: "text-color-tertiary",
+      danger: "text-danger",
+      success: "text-success",
+      warning: "text-warning",
+    },
   },
 });
