@@ -18,25 +18,20 @@ export const CreateQuest = ({
   setOpenFilter,
   className,
 }: CreateQuestProps) => {
-  const [titleGoal, setTitleGoal] = useState("");
   const [subtask, setSubtask] = useState("1");
   const [isConfirm, setIsConfirm] = useState(false);
   const setTitle = useCreateCard((state) => state.setTitle);
+  const title = useCreateCard((state) => state.title);
 
   const handleForm = (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
-  };
-
-  const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
-    setTitleGoal(e.target.value);
-    setTitle(e.target.value);
   };
 
   const onChangeSubtask = (e: string) => {
     const numberEvent = Number(e);
     if (numberEvent > 20) {
       setSubtask("20");
-    } else if (numberEvent < 0) {
+    } else if (numberEvent <= 0) {
       setSubtask("1");
     } else {
       setSubtask(e);
@@ -67,8 +62,8 @@ export const CreateQuest = ({
             animationPlaceholder={true}
             type="text"
             placeholder="Назовите вашу цель"
-            onChange={(e) => handleChangeTitle(e)}
-            value={titleGoal}
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
             inputStyle={clsx(
               "border-line-secondary border-2 py-2 px-3 rounded-xl w-full",
               text({ size: "md" }),

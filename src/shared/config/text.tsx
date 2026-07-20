@@ -23,5 +23,19 @@ export const text = tv({
       success: "text-success",
       warning: "text-warning",
     },
+    positions: {
+      left: 'text-left',
+      center: 'text-center',
+      right: 'text-right',
+    },
+    borders: {
+      up: 'border-t',
+      down: 'border-b',
+      'up-down': 'border-t border-b',
+      left: 'border-l ',
+      right: 'border-r ',
+      square: 'border',
+      'left-right': 'border-l border-r'
+    }
   },
 });

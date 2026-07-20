@@ -1,4 +1,4 @@
-import { IColors, ISizes, IWeights } from "../type/type";
+import { IBorder, IColors, IPosition, ISizes, IWeights } from "../type/type";
 
 export const colors: IColors[] = [
   {
@@ -81,5 +81,61 @@ export const sizes: ISizes[] = [
     id: 5,
     title: "Огромный",
     type: "bg",
+  },
+];
+
+export const position: IPosition[] = [
+  {
+    id: 1,
+    type: "left",
+    title: "Слева",
+  },
+  {
+    id: 2,
+    type: "center",
+    title: "По центру",
+  },
+  {
+    id: 3,
+    type: "right",
+    title: "Справа",
+  },
+];
+
+export const border: IBorder[] = [
+  {
+    id: 1,
+    type: "down",
+    title: "Снизу",
+  },
+  {
+    id: 2,
+    type: "left",
+    title: "Слева",
+  },
+  {
+    id: 3,
+    type: "right",
+    title: "Справа",
+  },
+  {
+    id: 4,
+    type: "square",
+    title: "Квадрат",
+  },
+  {
+    id: 5,
+    type: "up",
+    title: "Сверху",
+  },
+  {
+    id: 6,
+    type: "up-down",
+    title: "Сверху и снизу",
+  },
+  {
+    id: 7,
+    type: "left-right",
+    title: "Слева и справа",
   },
 ];

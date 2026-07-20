@@ -16,4 +16,9 @@ export const filters: IFilters[] = [
     title: "Конкретная задача",
     type: "quest",
   },
+  {
+    id: 4,
+    title: "Дополнительные настройки",
+    type: 'settings',
+  }
 ];

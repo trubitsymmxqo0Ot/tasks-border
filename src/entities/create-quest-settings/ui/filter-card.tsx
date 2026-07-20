@@ -1,11 +1,9 @@
 import clsx from "clsx";
-import { ColorsType, SizesType, WeightsType } from "../type/type";
 import { text } from "@/shared/config/text";
-import { findCurrentStyle } from "../helper/find-current-style";
+import { FilterTypes, findCurrentStyle } from "../helper/find-current-style";
 
-type FilterType = WeightsType | SizesType | ColorsType;
 
-interface FilterCardProps<T extends FilterType> {
+interface FilterCardProps<T extends FilterTypes> {
   title: string;
   titleStyle?: string;
   data: {
@@ -15,7 +13,7 @@ interface FilterCardProps<T extends FilterType> {
   }[];
   setValue: (type: T, title: string) => void;
 }
-export const FilterCard = <T extends FilterType>({
+export const FilterCard = <T extends FilterTypes>({
   title,
   titleStyle,
   data,
