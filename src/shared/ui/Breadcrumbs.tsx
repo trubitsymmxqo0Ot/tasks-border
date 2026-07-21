@@ -11,12 +11,13 @@ export const Breadcrumbs = ({
   className,
   separator = "-",
 }: BreadcrumbsProps) => {
+  const currentTitles = titles.filter((item) => typeof item !== "object");
   return (
-    <div className={clsx("flex items-center gap-1", className)}>
-      {titles.map((item, idx) => (
+    <div className={clsx("grid items-center gap-1", className)}>
+      {currentTitles.map((item, idx) => (
         <div className="flex items-center gap-1" key={idx}>
           <p>{item}</p>
-          <p>{titles[idx] !== titles[titles.length - 1] && separator}</p>
+          <p>{currentTitles[idx] !== titles[titles.length - 2] && separator}</p>
         </div>
       ))}
     </div>

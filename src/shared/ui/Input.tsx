@@ -62,7 +62,7 @@ export const Input = ({
     none: "opacity-0 top-1/2 left-2.5",
   };
   return (
-    <div className={clsx("relative", className)} ref={ref}>
+    <div className={clsx("relative w=full", className)} ref={ref}>
       {animationPlaceholder && (
         <label
           htmlFor={idForLabel}
@@ -73,7 +73,7 @@ export const Input = ({
                 ? "top-1/2 left-2.5"
                 : directionStyle[textDirection || "top"],
 
-            "absolute -translate-y-1/2 transition-all cursor-text text-color-tertiary",
+            "absolute -translate-y-1/2 transition-all cursor-text text-color-tertiary z-40",
           )}
         >
           {placeholder}
