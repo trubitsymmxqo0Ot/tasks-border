@@ -15,7 +15,7 @@ export const text = tv({
       black: "font-black",
       medium: "font-meduim",
     },
-    colors: {
+    color: {
       primary: "text-color-primary",
       secondary: "text-color-secondary",
       tertiary: "text-color-tertiary",

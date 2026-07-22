@@ -1,33 +1,44 @@
 import { Input } from "@/shared/ui/Input";
-import { useSelectFilter } from "../model/store";
 import clsx from "clsx";
 import { text } from "@/shared/config/text";
 import { SubmitEvent } from "react";
 import { FilterBlock } from "./filter-block";
 import { BetterStyles } from "./better-styles";
-import { COLORS, SIZES } from "../model/constants";
+import { COLORS, POSITIONS, SIZES, WEIGHTS } from "../model/constants";
+import { Sizes, DefaultColors } from "../types/types";
+import { data } from "../model/data";
+import { BorderStyles } from "./filter-components/border-styles";
+import { GapsStyle } from "./filter-components/gaps-style";
+import { useData } from "../hook/useData";
 
 export const CreateTasksFilterTItle = () => {
-  const { title, size, border, customColor, customMargin, customPadding } =
-    useSelectFilter((state) => state.data);
-  const setTitle = useSelectFilter((state) => state.setTitle);
-  const setSize = useSelectFilter((state) => state.setSize);
-  const setColor = useSelectFilter((state) => state.setColor);
-  const setMargin = useSelectFilter((state) => state.setMargin);
-  const setPadding = useSelectFilter((state) => state.setPadding);
-  const setBorder = useSelectFilter((state) => state.setBorder);
+  const {
+    setBorder,
+    setColor,
+    setDefaultColor,
+    setDefaultPosition,
+    setDefaultSize,
+    setDefaultWeight,
+    setMargin,
+    setPadding,
+    setSize,
+    setTitle,
+    border,
+    color,
+    customMargin,
+    customPadding,
+    defaultSize,
+    position,
+    size,
+    title,
+    weights,
+    defaultColor,
+  } = useData();
 
-  const onChangeSize = (
-    value: string,
-    setValue: (value: string) => void,
-    min: number,
-    max: number,
-  ) => {
+  const onChangeSize = (value: string, setValue: (value: string) => void) => {
     const cleanValue = value.replace(/[^0-9]/g, "").trim();
-    if (!cleanValue.length || Number(cleanValue) < min || Number.isNaN(value)) {
-      setValue(String(min));
-    } else if (Number(cleanValue) > max) {
-      setValue(String(max));
+    if (!cleanValue) {
+      setValue("");
     } else {
       setValue(cleanValue);
     }
@@ -52,81 +63,116 @@ export const CreateTasksFilterTItle = () => {
         placeholder="Введите заголовок"
         className="mb-6"
         animationPlaceholder={true}
+        idForLabel="title"
+        id="title"
       />
       <FilterBlock
-        title="Размеры заголовка"
-        betterStyle={<BetterStyles className="mb-4" array={SIZES} />}
+        title={data.size.title}
+        betterStyle={
+          <BetterStyles<Sizes>
+            setValue={setDefaultSize}
+            className="mb-4"
+            array={SIZES}
+            disabled={!!size}
+          />
+        }
       >
         <Input
           id="size"
           type="number"
-          min="1"
-          max="500"
+          min="0"
+          max="60"
           value={size}
-          onChange={(e) => onChangeSize(e.target.value, setSize, 1, 500)}
-          placeholder="мин. 1"
+          disabled={!!defaultSize}
+          onChange={(e) => onChangeSize(e.target.value, setSize)}
+          placeholder={data.size.placeholder}
           className="w-1/3 mb-1"
-          inputStyle="bg-primary border-line-secondary w-full border-2 p-2 text-center"
+          inputStyle={clsx(
+            !!defaultSize ? "border-danger" : "border-line-secondary",
+            "bg-primary w-full p-2 border-2 text-center",
+          )}
         />
       </FilterBlock>
       <FilterBlock
-        title="Цвет заголовка"
-        betterStyle={<BetterStyles className="mb-4" array={COLORS} />}
+        title={data.color.title}
+        betterStyle={
+          <BetterStyles<DefaultColors>
+            disabled={!!color}
+            setValue={setDefaultColor}
+            className="mb-4"
+            array={COLORS}
+          />
+        }
+        defaultGrid={false}
+        childrenClass="grid grid-cols-2 h-12 justify-center gap-3"
       >
         <Input
           type="color"
-          value={customColor}
+          value={color}
+          inputStyle={clsx(
+            !!defaultColor ? "border-danger" : "border-line-secondary",
+            " border-2 block w-full h-full cursor-pointer",
+          )}
+          className="mb-1.5 h-full"
+          disabled={!!defaultColor}
           onChange={(e) => setColor(e.target.value)}
         />
+        <button
+          onClick={() => setColor("")}
+          className="border-line-secondary border px-3"
+        >
+          Очистить
+        </button>
       </FilterBlock>
+
+      <GapsStyle
+        value={customMargin}
+        setValue={setMargin}
+        type="margin"
+        title="Внешний"
+      />
+      <GapsStyle
+        value={customPadding}
+        setValue={setPadding}
+        type="padding"
+        title="Внутренний"
+      />
+
+      <BorderStyles border={border} setBorder={setBorder} />
       <FilterBlock
-        title="Отступы"
-        childrenClass="flex-row gap-5"
+        title="Жирность текста"
+        childrenClass="flex-row gap-5 justify-center"
         className="mb-4"
       >
-        <Input
-          placeholder="Снаружи"
-          id="margin"
-          value={customMargin}
-          inputStyle="border-2 border-line-secondary bg-primary text-center py-1.5 px-3"
-          onChange={(e) => onChangeSize(e.target.value, setMargin, 0, 250)}
-        />
-        <Input
-          placeholder="Внутри"
-          value={customPadding}
-          inputStyle="border-2 border-line-secondary bg-primary text-center py-1.5 px-3"
-          onChange={(e) => onChangeSize(e.target.value, setPadding, 0, 250)}
-        />
+        {WEIGHTS.map((item, idx) => (
+          <button
+            key={idx}
+            className={clsx(
+              item === weights && "bg-line-primary",
+              "border-line-secondary border-2 px-2 py-1",
+            )}
+            onClick={() => setDefaultWeight(item)}
+          >
+            {item}
+          </button>
+        ))}
       </FilterBlock>
       <FilterBlock
-        defaultGrid={false}
-        title="Рамка"
-        childrenClass="grid grid-cols-2 grid-rows-2 justify-center gap-2"
+        title="Позиция заголовка"
+        childrenClass="flex-row gap-5 justify-center"
       >
-        <Input
-          placeholder="Слева"
-          value={border[0]}
-          inputStyle="border-line-secondary border-2 py-2 px-3"
-          onChange={(e) => setBorder(0, e.target.value)}
-        />
-        <Input
-          placeholder="Сверху"
-          value={border[1]}
-          inputStyle="border-line-secondary border-2 py-2 px-3"
-          onChange={(e) => setBorder(1, e.target.value)}
-        />
-        <Input
-          placeholder="Справа"
-          value={border[2]}
-          inputStyle="border-line-secondary border-2 py-2 px-3"
-          onChange={(e) => setBorder(2, e.target.value)}
-        />
-        <Input
-          placeholder="Снизу"
-          value={border[3]}
-          inputStyle="border-line-secondary border-2 py-2 px-3"
-          onChange={(e) => setBorder(3, e.target.value)}
-        />
+        {POSITIONS.map((item, idx) => (
+          <button
+            key={idx}
+            onClick={() => setDefaultPosition(item)}
+            className={clsx(
+              item === position && "bg-line-primary",
+              "border-line-secondary border-2 px-2 py-1",
+            )}
+          >
+            {item}
+          </button>
+        ))}
       </FilterBlock>
     </form>
   );

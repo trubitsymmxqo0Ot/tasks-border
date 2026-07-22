@@ -22,6 +22,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   maxLength?: number;
   idForLabel?: string;
   animationPlaceholder?: boolean;
+  disabled?: boolean;
 }
 
 export const Input = ({
@@ -38,6 +39,7 @@ export const Input = ({
   maxLength,
   idForLabel,
   animationPlaceholder,
+  disabled,
   ...rest
 }: InputProps) => {
   const [textDirection, textSetDirection] = useState<Directions>(null);
@@ -55,14 +57,13 @@ export const Input = ({
       }),
     );
   };
-
   const directionStyle = {
     top: "-top-1/2 left-1",
     bottom: "top-17 left-1",
     none: "opacity-0 top-1/2 left-2.5",
   };
   return (
-    <div className={clsx("relative w=full", className)} ref={ref}>
+    <div className={clsx("relative w-full", className)} ref={ref}>
       {animationPlaceholder && (
         <label
           htmlFor={idForLabel}
@@ -73,7 +74,7 @@ export const Input = ({
                 ? "top-1/2 left-2.5"
                 : directionStyle[textDirection || "top"],
 
-            "absolute -translate-y-1/2 transition-all cursor-text text-color-tertiary z-40",
+            "absolute -translate-y-1/2 transition-all cursor-text text-color-tertiary z-10",
           )}
         >
           {placeholder}
@@ -89,9 +90,11 @@ export const Input = ({
           value={value}
           placeholder={!animationPlaceholder ? placeholder : ""}
           onChange={onChange}
+          disabled={disabled}
           className={clsx(
             !!children &&
               (direction === "left" ? "pl-8" : "pr-11 relative z-10"),
+            disabled && "!cursor-not-allowed",
             inputStyle,
           )}
           maxLength={maxLength}

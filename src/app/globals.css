@@ -58,6 +58,20 @@ input[type="number"] {
   appearance: textfield;
 }
 
+input[type="color"],
+input[type="color" i]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  outline: 0;
+}
+
+::-webkit-color-swatch {
+  border: 0;
+}
+
+::-moz-color-swatch {
+  border: 0;
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
