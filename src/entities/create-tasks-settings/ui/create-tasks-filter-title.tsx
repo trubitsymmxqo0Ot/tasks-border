@@ -4,13 +4,20 @@ import { text } from "@/shared/config/text";
 import { SubmitEvent } from "react";
 import { FilterBlock } from "./filter-block";
 import { BetterStyles } from "./better-styles";
-import { COLORS, POSITIONS, SIZES, WEIGHTS } from "../model/constants";
+import {
+  BORDER_STYLES,
+  COLORS,
+  POSITIONS,
+  SIZES,
+  WEIGHTS,
+} from "../model/constants";
 import {
   Sizes,
   DefaultColors,
   IUseSelectFilterTitle,
   Weights,
   Positions,
+  BorderStyles,
 } from "../types/types";
 import { data } from "../model/data";
 import { GapsStyle } from "./filter-components/gaps-style";
@@ -27,8 +34,8 @@ export const CreateTasksFilterTItle = () => {
     title,
     defaultStyles,
     matrixData,
+    borderStyle,
   } = useData();
-
   const onChangeSize = (
     value: string,
     key: keyof IUseSelectFilterTitle,
@@ -46,8 +53,8 @@ export const CreateTasksFilterTItle = () => {
   };
 
   const arrayValues = {
-    padding: matrixData.customPadding,
-    margin: matrixData.customMargin,
+    padding: matrixData.padding,
+    margin: matrixData.margin,
     border: matrixData.border,
   };
 
@@ -141,7 +148,16 @@ export const CreateTasksFilterTItle = () => {
           sides={item.sides}
         />
       ))}
-
+      <FilterBlock title="Стиль рамки">
+        {BORDER_STYLES.map((item, idx) => (
+          <button
+            key={idx}
+            onClick={() => setStyle<BorderStyles>("borderStyle", item)}
+          >
+            {item}
+          </button>
+        ))}
+      </FilterBlock>
       <FilterBlock
         title="Жирность текста"
         childrenClass="flex-row gap-5 justify-center"

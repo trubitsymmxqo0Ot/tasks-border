@@ -28,5 +28,10 @@ export const text = tv({
       center: "text-center",
       right: "text-right",
     },
+    borderStyles: {
+      solid: "border-solid",
+      dashed: "border-dashed",
+      dotted: "border-dotted",
+    },
   },
 });

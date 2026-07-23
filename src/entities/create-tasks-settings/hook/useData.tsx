@@ -13,6 +13,7 @@ export const useData = () => {
     matrixData,
     color,
     size,
+    borderStyle,
   } = useSelectFilter((state) => state.styles);
 
   return {
@@ -24,6 +25,7 @@ export const useData = () => {
     color,
     size,
     defaultStyles,
+    borderStyle,
     matrixData,
   };
 };

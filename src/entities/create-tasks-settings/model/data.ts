@@ -27,7 +27,7 @@ export const data: IData = {
   gaps: [
     {
       title: "Отступ снаружи",
-      type: "customMargin",
+      type: "margin",
       name: "margin",
       sides: [
         { id: 0, placeholder: "Сверху" },
@@ -38,7 +38,7 @@ export const data: IData = {
     },
     {
       title: "Отступ внутри",
-      type: "customPadding",
+      type: "padding",
       name: "padding",
       sides: [
         { id: 0, placeholder: "Сверху" },

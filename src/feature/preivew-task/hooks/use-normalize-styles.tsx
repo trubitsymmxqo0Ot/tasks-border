@@ -1,34 +1,20 @@
 import { useSelectFilter } from "@/entities/create-tasks-settings";
+
 export const useNormalizeStyles = () => {
-  const { styles } = useSelectFilter((state) => state);
-  const defaultStyles = {
-    color: "primary",
-    weights: "medium",
-    position: "left",
-    size: "sm",
-  };
+  const styles = useSelectFilter((state) => state.styles);
+  const directions = ["Left", "Top", "Right", "Bottom"] as const;
 
-  let betterStyles = {};
-  let currentStyles = {};
+  const matrixData: Record<string, string> = {};
 
-  for (const defaultStyle in styles.default) {
-    for (const style in styles) {
-      if (defaultStyle === style) {
-        if (!styles[style]) {
-          betterStyles = {
-            ...betterStyles,
-            [defaultStyle]: styles.default[defaultStyle],
-          };
-          break;
-        } else {
-          currentStyles = {
-            ...currentStyles,
-            [style]: styles[style],
-          };
-          break;
-        }
-      }
-    }
+  for (const [key, value] of Object.entries(styles.matrixData)) {
+    directions.forEach((item, index) => {
+      matrixData[`${key}${item}`] = `${value[index]}px` || "";
+    });
   }
-  return { betterStyles, currentStyles };
+  return {
+    customStyles: {
+      ...matrixData,
+    },
+    betterStyles: {},
+  };
 };

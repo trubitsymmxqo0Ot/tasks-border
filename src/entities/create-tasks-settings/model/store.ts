@@ -19,9 +19,10 @@ export const useSelectFilter = create<IUseSelectFilter>((set) => ({
   styles: {
     size: "",
     color: "",
+    borderStyle: "solid",
     matrixData: {
-      customMargin: ["", "", "", ""],
-      customPadding: ["", "", "", ""],
+      margin: ["", "", "", ""],
+      padding: ["", "", "", ""],
       border: ["", "", "", ""],
     },
     default: {

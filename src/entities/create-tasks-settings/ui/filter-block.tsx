@@ -1,6 +1,6 @@
 import { text } from "@/shared/config/text";
 import clsx from "clsx";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 
 interface FilterBlockProps {
   title: string;
@@ -22,7 +22,6 @@ export const FilterBlock = ({
   className,
   defaultGrid = true,
 }: FilterBlockProps) => {
-  const [disabled, setDisabled] = useState(false);
   return (
     <div className={className}>
       <label
