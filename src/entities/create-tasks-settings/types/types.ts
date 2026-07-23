@@ -6,19 +6,24 @@ export type Positions = keyof typeof text.variants.positions | "";
 export type Sizes = keyof typeof text.variants.size | "";
 
 export type Sides = [string, string, string, string];
+export type SidesIds = 0 | 1 | 2 | 3;
 
-interface IDefaultSettings {
+export interface IDefaultSettings {
   color: DefaultColors;
   weights: Weights;
   position: Positions;
   size: Sizes;
 }
 
+export interface IArrayStyles {
+  border: Sides;
+  customMargin: Sides;
+  customPadding: Sides;
+}
+
 export interface IUseSelectFilterTitle {
   size: string;
   color: string;
-  border: Sides;
-  customPadding: Sides;
-  customMargin: Sides;
+  matrixData: IArrayStyles;
   default: IDefaultSettings;
 }

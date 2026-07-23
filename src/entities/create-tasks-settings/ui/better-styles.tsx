@@ -1,12 +1,14 @@
 import { text } from "@/shared/config/text";
 import clsx from "clsx";
 import { useState } from "react";
+import { IDefaultSettings } from "../types/types";
 
 interface BetterStylesProps<T> {
   array: T[];
   className?: string;
-  setValue: (value: T) => void;
+  setValue: (key: keyof IDefaultSettings, value: T | string) => void;
   disabled: boolean;
+  objectKey: keyof IDefaultSettings;
 }
 
 export function BetterStyles<T extends string>({
@@ -14,15 +16,16 @@ export function BetterStyles<T extends string>({
   className,
   setValue,
   disabled,
+  objectKey,
 }: BetterStylesProps<T>) {
   const [select, setSelect] = useState("");
   const handleSelectItem = (item: T) => {
     if (item === select) {
       setSelect("");
-      setValue("");
+      setValue(objectKey, "");
     } else {
       setSelect(item);
-      setValue(item);
+      setValue(objectKey, item);
     }
   };
 
